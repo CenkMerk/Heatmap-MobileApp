@@ -14,7 +14,13 @@ export default function StackNavigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen
+          name="WelcomeScreen"
+          component={WelcomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="LogInScreen" component={LogInScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="TabNavigation" component={TabNavigation} />
