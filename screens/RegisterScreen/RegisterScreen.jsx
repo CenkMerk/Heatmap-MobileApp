@@ -10,8 +10,10 @@ import React, { useState } from "react";
 import styles from "./style";
 import ButtonComp from "../../components/ButtonComp/ButtonComp";
 import { auth } from "../../firebase";
+import { useNavigation } from "@react-navigation/native";
 
 export default function RegisterScreen() {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,6 +25,8 @@ export default function RegisterScreen() {
         console.log("kullanıcı:", user.email);
       })
       .catch((error) => alert(error.message));
+
+    navigation.navigate("WelcomeScreen");
   };
 
   return (
