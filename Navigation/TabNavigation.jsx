@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 //icons
 import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 export default function TabNavigation() {
   return (
@@ -24,7 +25,16 @@ export default function TabNavigation() {
         tabBarActiveTintColor: "#FF6464",
       }}
     >
-      <Tab.Screen name="MapScreen" component={MapScreen} />
+      <Tab.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="map-marked-alt" size={30} color={color} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="LogOutScreen"
         component={LogOutScreen}
