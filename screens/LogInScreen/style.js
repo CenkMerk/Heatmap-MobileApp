@@ -3,18 +3,19 @@ import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:"#F6F6F6"
+    backgroundColor: "#F6F6F6",
+    paddingBottom:50
   },
   inner: {
     padding: 20,
-    flex: 1,
-    justifyContent: "space-around",
+    marginTop: "auto",
+    gap: 50,
   },
   textHello: {
     fontWeight: "400",
     fontSize: 14,
     color: "#282828",
-    marginBottom:5
+    marginBottom: 5,
   },
   title: {
     fontWeight: "700",

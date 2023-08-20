@@ -26,6 +26,18 @@ export default function StackNavigation() {
           name="LogInScreen"
           component={LogInScreen}
           options={{
+            title: "Login",
+            headerStyle: {
+              backgroundColor: "#F6F6F6",
+            },
+            headerShadowVisible: false,
+            headerLeft: () => <HeaderLeftButton />,
+          }}
+        />
+        <Stack.Screen
+          name="RegisterScreen"
+          component={RegisterScreen}
+          options={{
             title: "Sign Up",
             headerStyle: {
               backgroundColor: "#F6F6F6",
@@ -34,7 +46,6 @@ export default function StackNavigation() {
             headerLeft: () => <HeaderLeftButton />,
           }}
         />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="TabNavigation" component={TabNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
