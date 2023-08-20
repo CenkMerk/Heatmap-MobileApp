@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ImageBackground, Text } from "react-native";
+import { View, ImageBackground, Text, StatusBar } from "react-native";
 import styles from "./style";
 import { useNavigation } from "@react-navigation/native";
 //component
@@ -12,6 +12,7 @@ export default function WelcomeScreen() {
       source={require("../../assets/bg-photo.png")}
       style={styles.container}
     >
+      <StatusBar barStyle="dark-content" />
       <View style={styles.content}>
         <Text style={styles.welcome}>Welcome!</Text>
         <Text style={styles.title}>GeoHeat Maps</Text>
@@ -31,7 +32,6 @@ export default function WelcomeScreen() {
           btnColor="#74C6F7"
           btnWidth={327}
           btnMarginTop={10}
-
           btnClick={() => navigation.navigate("RegisterScreen")}
         />
       </View>

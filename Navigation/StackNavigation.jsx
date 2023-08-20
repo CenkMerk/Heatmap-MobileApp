@@ -8,6 +8,7 @@ import TabNavigation from "./TabNavigation";
 //navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HeaderLeftButton from "../components/HeaderLeftButton/HeaderLeftButton";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigation() {
@@ -21,7 +22,18 @@ export default function StackNavigation() {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="LogInScreen" component={LogInScreen} />
+        <Stack.Screen
+          name="LogInScreen"
+          component={LogInScreen}
+          options={{
+            title: "Sign Up",
+            headerStyle: {
+              backgroundColor: "#F6F6F6",
+            },
+            headerShadowVisible: false,
+            headerLeft: () => <HeaderLeftButton />,
+          }}
+        />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="TabNavigation" component={TabNavigation} />
       </Stack.Navigator>
