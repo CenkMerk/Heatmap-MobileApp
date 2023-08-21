@@ -17,8 +17,6 @@ export default function TabNavigation() {
         tabBarStyle: {
           backgroundColor: "white",
           height: 80,
-          borderTopLeftRadius: "50px",
-          borderTopRightRadius: "50px",
         },
         headerShadowVisible: false,
         tabBarShowLabel: false,
