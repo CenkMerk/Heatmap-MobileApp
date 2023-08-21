@@ -1,34 +1,79 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
-import MapView, { PROVIDER_GOOGLE, Heatmap } from "react-native-maps";
-import { locations } from "../../data/locations";
+import { View, StyleSheet, Text } from "react-native";
+import MapView, { PROVIDER_GOOGLE, Heatmap, Marker } from "react-native-maps";
+import * as Location from "expo-location";
 
 const customGradient = {
   colors: ["rgba(0, 255, 0, 0)", "yellow", "red"],
-  startPoints: [0.01, 0.2, 1],
+  startPoints: [0.01, 0.5, 1],
   colorMapSize: 256,
 };
 
 export default function MapScreen() {
+  const [location, setLocation] = useState(null);
+  const [locationsHistory, setLocationsHistory] = useState([]);
+
+  useEffect(() => {
+    const getPermissions = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Please grant location permissions");
+        return;
+      }
+
+      let currentLocation = await Location.getCurrentPositionAsync({});
+      setLocation(currentLocation);
+
+      setLocationsHistory((prevHistory) => [
+        ...prevHistory,
+        {
+          latitude: currentLocation.coords.latitude,
+          longitude: currentLocation.coords.longitude,
+        },
+      ]);
+    };
+    getPermissions();
+
+    const interval = setInterval(() => {
+      getPermissions();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {}, [locationsHistory]);
+
   return (
     <View style={styles.container}>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        initialRegion={{
-          latitude: 24.8307323,
-          longitude: 67.10113298,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        <Heatmap
-          points={locations}
-          radius={40}
-          opacity={0.9}
-          gradient={customGradient}
-        />
-      </MapView>
+      {location ? (
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          initialRegion={{
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          <Heatmap
+            points={locationsHistory}
+            radius={20}
+            opacity={0.7}
+            gradient={customGradient}
+          />
+          <Marker
+            coordinate={{
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }}
+            title="Buradasınız"
+            description="Konumunuz"
+          />
+        </MapView>
+      ) : (
+        <Text>yükleniyor</Text>
+      )}
     </View>
   );
 }
