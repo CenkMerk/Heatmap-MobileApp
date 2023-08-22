@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Heatmap, Marker } from "react-native-maps";
 import * as Location from "expo-location";
+import { getLocations, storeLocationHistory } from "../../api/http";
 
 const customGradient = {
   colors: ["rgba(0, 255, 0, 0)", "yellow", "red"],
-  startPoints: [0.01, 0.5, 1],
+  startPoints: [0.01, 0.3, 1],
   colorMapSize: 256,
 };
 
@@ -22,26 +23,23 @@ export default function MapScreen() {
       }
 
       let currentLocation = await Location.getCurrentPositionAsync({});
+
       setLocation(currentLocation);
 
-      setLocationsHistory((prevHistory) => [
-        ...prevHistory,
-        {
-          latitude: currentLocation.coords.latitude,
-          longitude: currentLocation.coords.longitude,
-        },
-      ]);
-    };
-    getPermissions();
+      storeLocationHistory({
+        latitude: currentLocation.coords.latitude,
+        longitude: currentLocation.coords.longitude,
+      });
 
-    const interval = setInterval(() => {
-      getPermissions();
-    }, 10000);
+      const locations = await getLocations();
+      setLocationsHistory(locations);
+    };
+
+    getPermissions();
+    const interval = setInterval(getPermissions, 10000);
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {}, [locationsHistory]);
 
   return (
     <View style={styles.container}>
@@ -58,7 +56,7 @@ export default function MapScreen() {
         >
           <Heatmap
             points={locationsHistory}
-            radius={20}
+            radius={30}
             opacity={0.7}
             gradient={customGradient}
           />
