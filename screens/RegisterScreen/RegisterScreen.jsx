@@ -8,8 +8,13 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import styles from "./style";
+//component
 import ButtonComp from "../../components/ButtonComp/ButtonComp";
+//SVG
+import LoginSvg from "../../assets/LoginSvg";
+//firebase
 import { auth } from "../../firebase";
+//navigation
 import { useNavigation } from "@react-navigation/native";
 
 export default function RegisterScreen() {
@@ -20,10 +25,6 @@ export default function RegisterScreen() {
   const handleSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("kullanıcı:", user.email);
-      })
       .catch((error) => alert(error.message));
 
     navigation.navigate("WelcomeScreen");
@@ -33,6 +34,7 @@ export default function RegisterScreen() {
     <KeyboardAvoidingView behavior="height" style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.inner}>
+          <LoginSvg />
           <View>
             <Text style={styles.textHello}>Hello There 🖐</Text>
             <Text style={styles.title}>Create an account</Text>
@@ -45,7 +47,7 @@ export default function RegisterScreen() {
               onChangeText={(text) => setEmail(text)}
             />
             <TextInput
-              placeholder="Şifre"
+              placeholder="Password"
               secureTextEntry
               style={styles.input}
               value={password}

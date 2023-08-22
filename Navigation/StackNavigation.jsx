@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 //screens
 import WelcomeScreen from "../screens/WelcomeScreen/WelcomeScreen";
@@ -8,6 +7,7 @@ import TabNavigation from "./TabNavigation";
 //navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+//component
 import HeaderLeftButton from "../components/HeaderLeftButton/HeaderLeftButton";
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +31,7 @@ export default function StackNavigation() {
               backgroundColor: "#F6F6F6",
             },
             headerShadowVisible: false,
+            headerTitleAlign: 'center',
             headerLeft: () => <HeaderLeftButton />,
           }}
         />
@@ -43,6 +44,7 @@ export default function StackNavigation() {
               backgroundColor: "#F6F6F6",
             },
             headerShadowVisible: false,
+            headerTitleAlign: 'center',
             headerLeft: () => <HeaderLeftButton />,
           }}
         />

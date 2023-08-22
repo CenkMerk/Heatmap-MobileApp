@@ -1,10 +1,13 @@
 import { View, Text } from "react-native";
 import React from "react";
 import styles from "./style";
+//firebase
 import { auth } from "../../firebase";
-import { useNavigation } from "@react-navigation/native";
-import ButtonComp from "../../components/ButtonComp/ButtonComp";
 import { deleteLocations } from "../../api/http";
+//navigation
+import { useNavigation } from "@react-navigation/native";
+//component
+import ButtonComp from "../../components/ButtonComp/ButtonComp";
 
 export default function LogOutScreen() {
   const navigation = useNavigation();

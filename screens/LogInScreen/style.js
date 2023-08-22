@@ -4,7 +4,8 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F6F6F6",
-    paddingBottom:50
+    paddingBottom:50,
+    alignItems:"center"
   },
   inner: {
     padding: 20,

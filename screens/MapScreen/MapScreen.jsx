@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, ActivityIndicator } from "react-native";
+import styles from "./style";
+//react native maps
 import MapView, { PROVIDER_GOOGLE, Heatmap, Marker } from "react-native-maps";
+//expo location
 import * as Location from "expo-location";
+//firebase
 import { getLocations, storeLocationHistory } from "../../api/http";
 
 const customGradient = {
@@ -21,7 +25,6 @@ export default function MapScreen() {
         console.log("Please grant location permissions");
         return;
       }
-
       let currentLocation = await Location.getCurrentPositionAsync({});
 
       setLocation(currentLocation);
@@ -39,6 +42,7 @@ export default function MapScreen() {
     const interval = setInterval(getPermissions, 10000);
 
     return () => clearInterval(interval);
+    
   }, []);
 
   return (
@@ -65,22 +69,15 @@ export default function MapScreen() {
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
             }}
-            title="Buradasınız"
-            description="Konumunuz"
+            title="You are here"
+            description="Your location"
           />
         </MapView>
       ) : (
-        <Text>yükleniyor</Text>
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" color="#FF6464" />
+        </View>
       )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    flex: 1,
-  },
-});

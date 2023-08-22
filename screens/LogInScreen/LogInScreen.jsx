@@ -8,9 +8,13 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import styles from "./style";
+//SVG
 import LoginSvg from "../../assets/LoginSvg";
+//component
 import ButtonComp from "../../components/ButtonComp/ButtonComp";
+//firebase
 import { auth } from "../../firebase";
+//navigation
 import { useNavigation } from "@react-navigation/native";
 
 export default function LogInScreen() {
@@ -29,10 +33,6 @@ export default function LogInScreen() {
   const handleSignIn = () => {
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("kullanıcı giriş yaptı", user.email);
-      })
       .catch((error) => alert(error.message));
   };
 
@@ -53,7 +53,7 @@ export default function LogInScreen() {
               onChangeText={(text) => setEmail(text)}
             />
             <TextInput
-              placeholder="Şifre"
+              placeholder="Password"
               secureTextEntry
               style={styles.input}
               value={password}

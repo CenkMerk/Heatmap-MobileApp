@@ -1,18 +1,20 @@
 import React from "react";
 import { View, ImageBackground, Text, StatusBar } from "react-native";
 import styles from "./style";
+//navigation
 import { useNavigation } from "@react-navigation/native";
 //component
 import ButtonComp from "../../components/ButtonComp/ButtonComp";
 
 export default function WelcomeScreen() {
   const navigation = useNavigation();
+  
   return (
     <ImageBackground
       source={require("../../assets/bg-photo.png")}
       style={styles.container}
     >
-      <StatusBar barStyle="dark-content" />
+      <StatusBar hidden={true}/>
       <View style={styles.content}>
         <Text style={styles.welcome}>Welcome!</Text>
         <Text style={styles.title}>GeoHeat Maps</Text>
