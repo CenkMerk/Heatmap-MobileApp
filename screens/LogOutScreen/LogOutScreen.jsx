@@ -4,6 +4,7 @@ import styles from "./style";
 import { auth } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
 import ButtonComp from "../../components/ButtonComp/ButtonComp";
+import { deleteLocations } from "../../api/http";
 
 export default function LogOutScreen() {
   const navigation = useNavigation();
@@ -13,6 +14,9 @@ export default function LogOutScreen() {
       .signOut()
       .then(() => {
         navigation.navigate("WelcomeScreen");
+        setTimeout(() => {
+          deleteLocations();
+        }, 10000);
       })
       .catch((error) => alert(error.message));
   };
